@@ -240,6 +240,34 @@ namespace VR_FE_API.Controllers
             }
         }
 
+        // Delete - Get
+        public ActionResult DeleteRentedMovie(int Id)
+        {
+            HttpResponseMessage response = WebClient.ApiClient.GetAsync($"RentalItems/{Id}").Result;
+            var rentalItem = response.Content.ReadAsAsync<RentalItem>().Result;
+            rentalItem.Movies = GetMovies();
+
+            return View(rentalItem);
+        }
+
+        // Delete - Post
+
+        [HttpPost]
+        public ActionResult DeleteRentedMovie(int Id, FormCollection collection)
+        {
+            try
+            {
+                HttpResponseMessage response = WebClient.ApiClient.DeleteAsync($"RentalItems/{Id}").Result;
+                var rentalItem = response.Content.ReadAsAsync<RentalItem>().Result;
+
+                return RedirectToAction("Edit", new { Id = rentalItem.RentalId });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
         #region Helper Methods
 
         public IEnumerable<SelectListItem> GetCustomers()

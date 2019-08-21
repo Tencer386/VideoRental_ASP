@@ -8,7 +8,9 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Create", "Movie")" class="btn btn-default" style="font-size:20px">
+        <i class="glyphicon glyphicon-file"></i> Create New
+    </a>
 </p>
 <table class="table">
     <tr>
@@ -30,9 +32,9 @@
             @Html.DisplayFor(modelItem => item.PicFileName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
+            @Html.ActionLink(" Edit", "Edit", new { id=item.MovieId }, new { @class = "glyphicon glyphicon-pencil" }) |
+            @Html.ActionLink(" Details", "Details", new { id=item.MovieId }, new { @class = "glyphicon glyphicon-list-alt" }) |
+            @Html.ActionLink(" Delete", "Delete", new { id=item.MovieId }, new { @class = "glyphicon glyphicon-trash" })
         </td>
     </tr>
 }
