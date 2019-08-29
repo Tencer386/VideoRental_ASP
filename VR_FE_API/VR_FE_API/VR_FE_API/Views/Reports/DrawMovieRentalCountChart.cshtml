@@ -1,0 +1,63 @@
+﻿@using System.Web.UI.WebControls.Expressions
+@model IEnumerable<VR_FE_API.Models.MovieRentalCountReport>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Movie Rental Chart</title>
+    </head>
+
+<body>
+    @{ 
+        var chartTheme = @"
+            <Chart BorderlineDashStyle=""Solid"" BorderlineWidth=""1""
+                   BorderlineColor=""Black"" BackSecondaryColor=""Green""
+                   BackGradientStyle=""TopBottom"" Palette=""Light""
+                   AntiAliasing=""All"">
+
+                <ChartAreas>
+                    <ChartArea Name=""Default"" _Template_=""All""
+                               BackGradientStyle=""None""
+                               BackColor=""Transparent""
+                               BackSecondaryColor=""White""
+                               BorderColor=""64, 64, 64, 64""
+                               BorderDashStyle=""Solid""
+                               ShadowColor=""Transparent"">
+
+                            <AxisX Title=""Movies"" IsLabelAutoFit=""False"">
+                                <LabelStyle Angle=""0"" Interval=""1""
+                                            ForeColor=""White""
+                                            Font=""Trebuchet MS, 10pt, style=Bold""/>
+                            </AxisX>
+                            
+                            <AxisY  Title=""Number of Times Rented"" 
+                                    IsLabelAutoFit=""False"">
+                                <LabelStyle Angle=""0"" Interval=""1""
+                                            ForeColor=""White""
+                                            Font=""Trebuchet MS, 10pt, style=Bold""/>
+                            </AxisY>
+                            
+                            <Area3DStyle Enable3D=""false"" Inclination=""60""
+                                         Rotation=""30""/>
+                    </ChartArea>
+                </ChartAreas>
+            </Chart>
+
+        ";
+        var chart = new Chart(width: 600, height: 600, theme: chartTheme)
+                        .AddTitle("Movie Rental Chart")
+                        .AddSeries("Default", chartType: "Bar",
+                                   xValue: Model, xField: "Name",
+                                   yValues: Model, yFields: "RentalCount")
+                        .Write();
+    }
+
+</body>
+
+</html>

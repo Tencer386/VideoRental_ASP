@@ -58,5 +58,14 @@
       <End Role="Rental" EntitySet="Rentals" />
       <End Role="RentalItem" EntitySet="RentalItems" />
     </AssociationSet>
+    <EntitySet Name="MovieRentalCountReports" EntityType="VideoRentalModel.MovieRentalCountReport" />
   </EntityContainer>
+  <EntityType Name="MovieRentalCountReport">
+    <Key>
+      <PropertyRef Name="MovieId" />
+    </Key>
+    <Property Name="MovieId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RentalCount" Type="Int32" />
+  </EntityType>
 </Schema>

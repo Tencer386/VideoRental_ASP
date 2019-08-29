@@ -1,0 +1,41 @@
+﻿@model IEnumerable<VR_FE_API.Models.MovieRentalCountReport>
+
+@{
+    ViewBag.Title = "MovieRentalReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie Rental Report</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentalCount)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RentalCount)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    <h2>Chart</h2>
+    <img src="@Url.Action("DrawMovieRentalCountChart")" />
+</div>
+
+<p>
+    @Html.ActionLink("Back to List", "Index", "Movie")
+</p>

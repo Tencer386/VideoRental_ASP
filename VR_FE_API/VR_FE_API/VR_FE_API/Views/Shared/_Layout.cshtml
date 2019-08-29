@@ -28,6 +28,12 @@
                     <li>@Html.ActionLink("Movies", "Index", "Movie")</li>
                     <li>@Html.ActionLink("Customers", "Index", "Customer")</li>
                     <li>@Html.ActionLink("Rentals", "Index", "Rental")</li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Rented Movies","GetRentedMovieReport", "Reports")</li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

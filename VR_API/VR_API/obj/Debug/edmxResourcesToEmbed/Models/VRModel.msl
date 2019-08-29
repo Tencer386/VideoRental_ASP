@@ -38,5 +38,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MovieRentalCountReports">
+      <EntityTypeMapping TypeName="VideoRentalModel.MovieRentalCountReport">
+        <MappingFragment StoreEntitySet="MovieRentalCountReport">
+          <ScalarProperty Name="RentalCount" ColumnName="RentalCount" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

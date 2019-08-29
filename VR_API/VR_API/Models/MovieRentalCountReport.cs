@@ -15,18 +15,14 @@ namespace VR_API.Models
 using System;
     using System.Collections.Generic;
     
-public partial class RentalItem
+public partial class MovieRentalCountReport
 {
-
-    public int RentalItemId { get; set; }
-
-    public int RentalId { get; set; }
 
     public int MovieId { get; set; }
 
+    public string Name { get; set; }
 
-
-    public virtual Rental Rental { get; set; }
+    public Nullable<int> RentalCount { get; set; }
 
 }
 

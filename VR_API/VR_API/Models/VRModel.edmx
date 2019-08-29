@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="VideoRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="VideoRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerId" />
@@ -38,6 +38,16 @@
           <Property Name="RentalId" Type="int" Nullable="false" />
           <Property Name="MovieId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VideoRental.dbo.MovieRentalCountReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MovieRentalCountReport">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="RentalCount" Type="int" />
+        </EntityType>
         <Association Name="FK_dbo_RentalItem_dbo_Rental_RentalId">
           <End Role="Rental" Type="Self.Rental" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -57,13 +67,19 @@
           <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rental" EntityType="Self.Rental" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RentalItem" EntityType="Self.RentalItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieRentalCountReport" EntityType="Self.MovieRentalCountReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MovieRentalCountReport].[MovieId] AS [MovieId], 
+    [MovieRentalCountReport].[Name] AS [Name], 
+    [MovieRentalCountReport].[RentalCount] AS [RentalCount]
+    FROM [dbo].[MovieRentalCountReport] AS [MovieRentalCountReport]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_RentalItem_dbo_Rental_RentalId" Association="Self.FK_dbo_RentalItem_dbo_Rental_RentalId">
             <End Role="Rental" EntitySet="Rental" />
             <End Role="RentalItem" EntitySet="RentalItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VideoRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -125,7 +141,16 @@
             <End Role="Rental" EntitySet="Rentals" />
             <End Role="RentalItem" EntitySet="RentalItems" />
           </AssociationSet>
+          <EntitySet Name="MovieRentalCountReports" EntityType="VideoRentalModel.MovieRentalCountReport" />
         </EntityContainer>
+        <EntityType Name="MovieRentalCountReport">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RentalCount" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -165,6 +190,15 @@
               <MappingFragment StoreEntitySet="RentalItem">
                 <ScalarProperty Name="RentalItemId" ColumnName="RentalItemId" />
                 <ScalarProperty Name="RentalId" ColumnName="RentalId" />
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieRentalCountReports">
+            <EntityTypeMapping TypeName="VideoRentalModel.MovieRentalCountReport">
+              <MappingFragment StoreEntitySet="MovieRentalCountReport">
+                <ScalarProperty Name="RentalCount" ColumnName="RentalCount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MovieId" ColumnName="MovieId" />
               </MappingFragment>
             </EntityTypeMapping>

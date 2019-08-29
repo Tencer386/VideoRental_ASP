@@ -149,13 +149,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\RentalController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\MovieRentalCountReport.cs" />
     <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\RentalItem.cs" />
+    <Compile Include="Models\RentedMoviesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CustomerMoviesViewModel.cs" />
     <Compile Include="ViewModels\CustomerRentalDetails.cs" />
@@ -238,6 +241,10 @@
     <Content Include="Views\Rental\AddMovies.cshtml" />
     <Content Include="Views\Rental\EditRentedMovie.cshtml" />
     <Content Include="Views\Rental\DeleteRentedMovie.cshtml" />
+    <Content Include="Views\View.cshtml" />
+    <Content Include="Views\Reports\GetRentalCountData.cshtml" />
+    <Content Include="Views\Reports\DrawMovieRentalCountChart.cshtml" />
+    <Content Include="Views\Reports\GetRentedMovieReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

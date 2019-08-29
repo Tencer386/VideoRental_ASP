@@ -41,6 +41,12 @@
 
 </table>
 
+@using (Html.BeginForm("GetRentalCountData", "Reports"))
+{
+    <button name="button" value="GoToReport" style="width:128px;height:48px;font-weight:bold"
+            title="Go To Report">Go to Report</button>
+}
+
 @section Scripts{
     <script>
         $(function () {
